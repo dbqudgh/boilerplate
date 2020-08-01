@@ -8,9 +8,12 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.27"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
   "scripts": {
     "start": "node index.js",
+    "backend":"nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "dbqudgh",

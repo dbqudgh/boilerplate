@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 5000
-const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+
+
+
+//개발환경 배포환경 따라서 mongodbURI 가저오기
+const config = require('./config/key')
+
 const {
     User
 } = require('./models/User')
@@ -16,8 +21,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 
-
-mongoose.connect('mongodb+srv://dbqudgh:qwer1313@cluster0.vdboo.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+//mongodb 연결해주기
+const mongoose = require('mongoose')
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -27,17 +33,14 @@ mongoose.connect('mongodb+srv://dbqudgh:qwer1313@cluster0.vdboo.mongodb.net/<dbn
 }).catch(err => console.log(err))
 
 
-app.get('/', (req, res) => res.send('Hello World!~~안녕하세요'))
+app.get('/', (req, res) => res.send('hi'))
 
 
 app.post('/register', (req, res) => {
 
     //회원 가입 할때 필요한 정보들을 client에서 가져오면
     //그것들을 데이터 베이스에 넣어준다
-
-    //app에서 body parser 해줘서 클라이언트에서 응답받은걸 사용가능
     const user = new User(req.body)
-
 
 
     user.save((err, userInfo) => {
@@ -45,12 +48,11 @@ app.post('/register', (req, res) => {
             success: false,
             err
         })
+        //status 200 성공
         return res.status(200).json({
             success: true
         })
     })
-
-
 
 })
 
