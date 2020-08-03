@@ -91,6 +91,7 @@ userSchema.methods.generateToken = function(cb){
 
 userSchema.statics.findByToken = function( token, cb){
     var user = this
+    
     //토큰을 decode한다
     jwt.verify(token,'ST',function(err,decoded){
         //유저아이디를 이용해서 유저를 찾은 다음에
