@@ -58,6 +58,10 @@ app.post('/api/users/register', (req, res) => {
 })
 
 
+app.get('/api/hello',(req,res)=>{
+    res.send("안녕하세요~")
+})
+
 app.post('/login', (req, res) => {
 
     //요청된 이메일을 데이터 베이스에서 있는 찾는다
@@ -129,6 +133,7 @@ app.get('/api/users/logout', auth, (req, res) => {
         })
     })
 })
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
