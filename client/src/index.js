@@ -11,12 +11,14 @@ import ReduxTunk from 'redux-thunk'
 import Reducer from './_reducers';
 
 const createStoreWithMiddleware = applyMiddleware(PromiseMiddleware,ReduxTunk)(createStore)
+//그냥 redux는 객체 밖에 못 받기 때문에 미들웨어를 추가해준다
 
 
 ReactDOM.render(
 
   <Provider store={createStoreWithMiddleware(Reducer
-  ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  ,window.__REDUX_DEVTOOLS_EXTENSION__ && 
+   window.__REDUX_DEVTOOLS_EXTENSION__()
   )}>
     <App />
   </Provider>,
